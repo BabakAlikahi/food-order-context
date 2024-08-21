@@ -66,8 +66,4 @@ app.use((req, res) => {
   res.status(404).json({ message: 'Not found' });
 });
 
-const port = process.env.PORT || 3000;
-
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
+app.listen('https://food-order-context-seven.vercel.app/');
