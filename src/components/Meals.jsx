@@ -6,7 +6,7 @@ function Meals() {
     // const response = await fetch("http://localhost:3000/meals");
     
     // Product Mood
-    const response = await fetch("https://food-order-context-seven.vercel.app/");
+    const response = await fetch("https://food-order-context-seven.vercel.app/meals");
     if (!response.ok) {
     }
     const resData = await response.json();
