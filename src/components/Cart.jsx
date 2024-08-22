@@ -18,8 +18,12 @@ function Cart() {
     userProgressCt.hideCart();
   }
 
+  function handleCheckOutModal() {
+    userProgressCt.showCheckOut();
+  }
+
   return (
-    <Modal className="cart" open={userProgressCt.progress === "cart"}>
+    <Modal className="cart" open={userProgressCt.progress === "cart"} onClose={userProgressCt.progress === "cart" && handleCloseModal}>
       <h2>your cart</h2>
       <ul>
         {cartCt.items.map((item) => {
@@ -42,7 +46,7 @@ function Cart() {
         <Button onClick={handleCloseModal} textOnly>
           Close
         </Button>
-        {cartCt.items.length > 0 && <Button>Go to CheckOut</Button>}
+        {cartCt.items.length > 0 && <Button onClick={handleCheckOutModal}>Go to CheckOut</Button>}
       </p>
     </Modal>
   );

@@ -20,7 +20,7 @@ export function UserProgressContextProvider({ children }) {
   }
 
   function showCheckOut() {
-    setUserProgress("checkout");
+    setUserProgress("checkOut");
   }
 
   function hideCheckOut() {
