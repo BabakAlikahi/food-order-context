@@ -5,7 +5,8 @@ import { currencyFormatter } from "../utility/formatting";
 import Modal from "./UI/Modal";
 import Button from "./UI/Button";
 import CartContext from "../store/CartContext";
-import UserProgressContext from "../store/userProgressContext";
+import UserProgressContext from "../store/UserProgressContext";
+import CartItem from "./CartItem";
 
 function Cart() {
   const cartCt = useContext(CartContext);
@@ -14,7 +15,6 @@ function Cart() {
   const cartTotal = cartCt.items.reduce((totalPrice, item) => totalPrice + item.quantity * item.price, 0);
 
   function handleCloseModal() {
-    console.log("close modal");
     userProgressCt.hideCart();
   }
 
@@ -24,9 +24,16 @@ function Cart() {
       <ul>
         {cartCt.items.map((item) => {
           return (
-            <li key={item.id}>
-              {item.name} - {item.quantity}
-            </li>
+            <CartItem
+              key={item.id}
+              item={item}
+              onIncrease={() => {
+                cartCt.addItem(item);
+              }}
+              onDecrease={() => {
+                cartCt.removeItem(item.id);
+              }}
+            />
           );
         })}
       </ul>
@@ -35,7 +42,7 @@ function Cart() {
         <Button onClick={handleCloseModal} textOnly>
           Close
         </Button>
-        <Button>Go to CheckOut</Button>
+        {cartCt.items.length > 0 && <Button>Go to CheckOut</Button>}
       </p>
     </Modal>
   );

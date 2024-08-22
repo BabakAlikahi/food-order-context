@@ -3,7 +3,7 @@ import { useContext } from "react";
 import Button from "./UI/Button";
 import Logo from "../assets/logo.jpg";
 import CartContext from "../store/CartContext";
-import UserProgressContext from "../store/userProgressContext";
+import UserProgressContext from "../store/UserProgressContext";
 
 function Header() {
   const cartCt = useContext(CartContext);
