@@ -23,7 +23,7 @@ function Cart() {
   }
 
   return (
-    <Modal className="cart" open={userProgressCt.progress === "cart"} onClose={userProgressCt.progress === "cart" && handleCloseModal}>
+    <Modal className="cart" open={userProgressCt.progress === "cart"}>
       <h2>your cart</h2>
       <ul>
         {cartCt.items.map((item) => {
