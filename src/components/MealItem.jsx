@@ -2,7 +2,7 @@ import { useContext } from "react";
 
 import { currencyFormatter } from "../utility/formatting";
 
-import Button from "./UI/button";
+import Button from "./UI/Button";
 import CartContext from "../store/CartContext";
 
 function MealItem({ meal }) {
