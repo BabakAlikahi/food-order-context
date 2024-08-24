@@ -7,14 +7,17 @@ async function sendHttpRequest(url, config) {
   if (!response.ok) {
     throw new Error(resData.message || "Failed to send Request");
   }
-
-  console.log(resData);
   return resData;
 }
 export default function useHttp(url, config, initialData) {
   const [error, setErrors] = useState("");
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState(initialData);
+
+function clearData() {
+  setData(initialData);
+  
+}
 
   const sendRequest = useCallback(
     async function sendRequest(data) {
@@ -41,5 +44,6 @@ export default function useHttp(url, config, initialData) {
     loading,
     data,
     sendRequest,
+    clearData,
   };
 }

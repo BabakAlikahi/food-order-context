@@ -21,12 +21,18 @@ function CheckOut() {
   const cartCt = useContext(CartContext);
   const cartTotal = cartCt.items.reduce((totalPrice, item) => totalPrice + item.quantity * item.price, 0);
 
-  const { data, loading: sending, error, sendRequest } = useHttp("http://localhost:3000/orders/", requestConfig);
+  const { data, loading: sending, error, sendRequest, clearData } = useHttp("http://localhost:3000/orders/", requestConfig);
 
   const userProgressCt = useContext(UserProgressContext);
   function handleCloseModal() {
     userProgressCt.hideCheckOut();
   }
+  function handleFinish() {
+    userProgressCt.hideCheckOut();
+    cartCt.clearCard();
+    clearData();
+  }
+
   function handelSubmitForm(event) {
     event.preventDefault();
     const fd = new FormData(event.target);
@@ -53,6 +59,21 @@ function CheckOut() {
 
   if (sending) {
     actions = <span>Sending order data</span>;
+  }
+
+  if (data && !error) {
+    return (
+      <Modal open={userProgressCt.progress === "checkOut"} onClose={handleFinish}>
+        <h2>success</h2>
+        <p>your order submitted successfully</p>
+        <p>we will get back to you with more details via email within the next few minutes</p>
+        <p className="modal-actions">
+          <Button type="button" onClick={handleFinish} textOnly>
+            okay
+          </Button>
+        </p>
+      </Modal>
+    );
   }
 
   return (
